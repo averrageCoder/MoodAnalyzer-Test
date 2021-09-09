@@ -3,7 +3,7 @@ package com.bridgelabz.moodanalyzer;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-
+import org.junit.rules.ExpectedException;
 import org.junit.Assert;
 
 class MoodAnalyzerTest {
@@ -31,10 +31,16 @@ class MoodAnalyzerTest {
 	@Test
 	public void givenNull_shouldReturnHappy() throws Exception {
 		MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
-		
-		String mood = moodAnalyzer.moodAnalyzer(null);
-		
-		assertEquals(mood, "HAPPY");
+		String mood = null;
+		try {
+			ExpectedException exceptionRule = ExpectedException.none();
+			exceptionRule.expect(MoodAnalyzerException.class);
+			mood = moodAnalyzer.moodAnalyzer(null);
+		}
+		catch (MoodAnalyzerException e) {
+			//e.printStackTrace();
+			assertEquals(e.getMessage(), "Please enter a proper message!");
+		}
 		
 	}
 
