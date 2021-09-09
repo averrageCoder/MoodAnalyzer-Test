@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import org.junit.Assert;
+
 class MoodAnalyzerTest {
 
 	@Test
@@ -21,6 +23,16 @@ class MoodAnalyzerTest {
 		MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
 		
 		String mood = moodAnalyzer.moodAnalyzer("This is a happy message");
+		
+		assertEquals(mood, "HAPPY");
+		
+	}
+	
+	@Test
+	public void givenNull_shouldReturnHappy() throws Exception {
+		MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
+		
+		String mood = moodAnalyzer.moodAnalyzer(null);
 		
 		assertEquals(mood, "HAPPY");
 		
