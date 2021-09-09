@@ -29,13 +29,29 @@ class MoodAnalyzerTest {
 	}
 	
 	@Test
-	public void givenNull_shouldReturnHappy() throws Exception {
+	public void givenNull_shouldReturnCustomException() throws Exception {
 		MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
 		String mood = null;
 		try {
 			ExpectedException exceptionRule = ExpectedException.none();
 			exceptionRule.expect(MoodAnalyzerException.class);
 			mood = moodAnalyzer.moodAnalyzer(null);
+		}
+		catch (MoodAnalyzerException e) {
+			//e.printStackTrace();
+			assertEquals(e.getMessage(), "Please enter a proper message!");
+		}
+		
+	}
+	
+	@Test
+	public void givenEmptyMessage_shouldReturnCustomException() throws Exception {
+		MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
+		String mood = null;
+		try {
+			ExpectedException exceptionRule = ExpectedException.none();
+			exceptionRule.expect(MoodAnalyzerException.class);
+			mood = moodAnalyzer.moodAnalyzer();
 		}
 		catch (MoodAnalyzerException e) {
 			//e.printStackTrace();
