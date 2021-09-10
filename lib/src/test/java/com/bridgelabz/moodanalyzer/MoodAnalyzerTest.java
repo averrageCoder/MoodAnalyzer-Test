@@ -11,35 +11,27 @@ class MoodAnalyzerTest {
 	@Test
 	public void givenSadMessage_shouldReturnSad() throws Exception {
 		MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
-		
 		String mood = moodAnalyzer.moodAnalyzer("This is a sad message");
-		
 		assertEquals(mood, "SAD");
-		
 	}
 	
 	@Test
 	public void givenHappyMessage_shouldReturnHappy() throws Exception {
 		MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
-		
 		String mood = moodAnalyzer.moodAnalyzer("This is a happy message");
-		
 		assertEquals(mood, "HAPPY");
-		
 	}
 	
 	@Test
 	public void givenNull_shouldReturnCustomException() throws Exception {
 		MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
-		String mood = null;
 		try {
 			ExpectedException exceptionRule = ExpectedException.none();
 			exceptionRule.expect(MoodAnalyzerException.class);
-			mood = moodAnalyzer.moodAnalyzer(null);
+			String mood = moodAnalyzer.moodAnalyzer(null);
 		}
 		catch (MoodAnalyzerException e) {
-			//e.printStackTrace();
-			assertEquals(e.getMessage(), "Please enter a proper message!");
+			assertEquals(e.type, MoodAnalyzerException.ExceptionType.ENTERED_NULL);
 		}
 		
 	}
@@ -47,15 +39,13 @@ class MoodAnalyzerTest {
 	@Test
 	public void givenEmptyMessage_shouldReturnCustomException() throws Exception {
 		MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
-		String mood = null;
 		try {
 			ExpectedException exceptionRule = ExpectedException.none();
 			exceptionRule.expect(MoodAnalyzerException.class);
-			mood = moodAnalyzer.moodAnalyzer();
+			String mood = moodAnalyzer.moodAnalyzer("");
 		}
 		catch (MoodAnalyzerException e) {
-			//e.printStackTrace();
-			assertEquals(e.getMessage(), "Please enter a proper message!");
+			assertEquals(e.type, MoodAnalyzerException.ExceptionType.ENTERED_EMPTY);
 		}
 		
 	}
